@@ -1,22 +1,19 @@
-FROM python:3.9-slim
+FROM python:3.9
 
 WORKDIR /app
 
-# Copy requirements first to leverage Docker cache
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Add these lines to install ffmpeg
-RUN apt-get update && apt-get install -y ffmpeg
+# Install ffmpeg
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Copy the application files
 COPY . .
-
-# Create music directory
 RUN mkdir -p music
 
-# Expose the port
 EXPOSE 8080
 
-# Command to run the application
-CMD gunicorn --bind 0.0.0.0:8080 app:app 
+CMD ["python", "app.py"]
