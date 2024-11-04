@@ -4,7 +4,7 @@
     <title>MP3 Player</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,57 +14,40 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f5f5f7;
-            color: #1d1d1f;
-            line-height: 1.6;
+            background-color: #121212;
+            color: #e1e1e1;
             padding: 2rem;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
+            font-size: 2rem;
+            font-weight: 500;
             margin-bottom: 2rem;
-            color: #1d1d1f;
             text-align: center;
+            color: #ffffff;
         }
 
         .audio-container {
-            background: white;
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 1.5rem 0;
         }
 
-        .audio-container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .audio-container:last-child {
+            border-bottom: none;
         }
 
         .file-name {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: #1d1d1f;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: #a0a0a0;
         }
 
         audio {
             width: 100%;
-            height: 36px;
-            border-radius: 8px;
-        }
-
-        audio::-webkit-media-controls-panel {
-            background-color: #f5f5f7;
-        }
-
-        audio::-webkit-media-controls-play-button,
-        audio::-webkit-media-controls-mute-button {
-            border-radius: 50%;
-            background-color: #007AFF;
+            filter: invert(100%);
+            opacity: 0.9;
         }
 
         @media (max-width: 768px) {
@@ -72,42 +55,14 @@
                 padding: 1rem;
             }
 
-            h1 {
-                font-size: 2rem;
-            }
-
             .audio-container {
-                padding: 1rem;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #1d1d1f;
-                color: #f5f5f7;
-            }
-
-            h1 {
-                color: #f5f5f7;
-            }
-
-            .audio-container {
-                background: #2c2c2e;
-            }
-
-            .file-name {
-                color: #f5f5f7;
-            }
-
-            audio::-webkit-media-controls-panel {
-                background-color: #2c2c2e;
+                padding: 1rem 0;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Audio Library</h1>
+    <h1>Sony Demos</h1>
     {% for file in mp3_files %}
     <div class="audio-container">
         <div class="file-name">{{ file.replace('.mp3', '') }}</div>
