@@ -37,7 +37,7 @@ def process_audio(file_path):
 
 @app.route('/')
 def index():
-    mp3_files = [f for f in os.listdir(MP3_DIRECTORY) if f.endswith('.mp3')]
+    mp3_files = sorted([f for f in os.listdir(MP3_DIRECTORY) if f.endswith('.mp3')])
     return render_template('index.html', mp3_files=mp3_files)
 
 @app.route('/play/<filename>')
