@@ -16,4 +16,5 @@ def play_file(filename):
     return send_file(os.path.join(MP3_DIRECTORY, filename), mimetype='audio/mpeg')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=True) 
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
