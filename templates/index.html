@@ -1,49 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Audio Player</title>
+    <title>MP3 Player</title>
     <style>
-        body {
-            margin: 20px;
-            background-color: #f0f0f0;
-        }
         .audio-container {
-            margin: 10px 0;
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .audio-player {
-            flex: 1;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .file-name {
-            min-width: 200px;
-            font-family: Arial, sans-serif;
-            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
         audio {
             width: 100%;
         }
-        audio::-webkit-media-controls-enclosure {
-            border-radius: 0;
-        }
-        audio::-webkit-media-controls-panel {
-            background-color: #fff;
-        }
     </style>
 </head>
 <body>
-    {% for audio_file in audio_files %}
+    <h1>MP3 Player</h1>
+    {% for file in mp3_files %}
     <div class="audio-container">
-        <div class="file-name">{{ audio_file }}</div>
-        <div class="audio-player">
-            <audio controls>
-                <source src="{{ url_for('serve_audio', filename=audio_file) }}" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
+        <div class="file-name">{{ file }}</div>
+        <audio controls>
+            <source src="{{ url_for('play_file', filename=file) }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
     {% endfor %}
 </body>
