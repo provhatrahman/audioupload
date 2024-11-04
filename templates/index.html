@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Player</title>
+    <style>
+        body {
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .audio-container {
+            margin: 10px 0;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .audio-player {
+            flex: 1;
+        }
+        .file-name {
+            min-width: 200px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        audio {
+            width: 100%;
+        }
+        audio::-webkit-media-controls-enclosure {
+            border-radius: 0;
+        }
+        audio::-webkit-media-controls-panel {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    {% for audio_file in audio_files %}
+    <div class="audio-container">
+        <div class="file-name">{{ audio_file }}</div>
+        <div class="audio-player">
+            <audio controls>
+                <source src="{{ url_for('serve_audio', filename=audio_file) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html> 
