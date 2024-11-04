@@ -2,15 +2,18 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Install development dependencies
+# Copy requirements first to leverage Docker cache
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-RUN pip install flask-debug watchdog
 
-# Don't copy the code - we'll mount it as a volume
-VOLUME ["/app"]
+# Copy the application files
+COPY . .
 
-EXPOSE 5000
+# Create music directory
+RUN mkdir -p music
 
-# Use Flask development server
-CMD ["python", "app.py"] 
+# Expose the port
+EXPOSE 8080
+
+# Command to run the application
+CMD gunicorn --bind 0.0.0.0:8080 app:app 
