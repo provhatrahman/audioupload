@@ -8,9 +8,7 @@ os.makedirs(MP3_DIRECTORY, exist_ok=True)
 
 @app.route('/')
 def index():
-    # Sort files alphabetically, ignoring case
-    mp3_files = sorted([f for f in os.listdir(MP3_DIRECTORY) if f.endswith('.mp3')], 
-                      key=str.lower)
+    mp3_files = sorted([f for f in os.listdir(MP3_DIRECTORY) if f.endswith('.mp3')])
     return render_template('index.html', mp3_files=mp3_files)
 
 @app.route('/play/<filename>')
