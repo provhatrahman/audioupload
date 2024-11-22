@@ -1,5 +1,10 @@
 from flask import Flask, render_template, send_file
 import os
+import re
+
+def natural_sort_key(s):
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split('([0-9]+)', s)]
 
 app = Flask(__name__)
 
@@ -8,7 +13,8 @@ os.makedirs(MP3_DIRECTORY, exist_ok=True)
 
 @app.route('/')
 def index():
-    mp3_files = sorted([f for f in os.listdir(MP3_DIRECTORY) if f.endswith('.mp3')])
+    mp3_files = sorted([f for f in os.listdir(MP3_DIRECTORY) if f.endswith('.mp3')],
+                      key=natural_sort_key)
     return render_template('index.html', mp3_files=mp3_files)
 
 @app.route('/play/<filename>')
